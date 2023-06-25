@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: api-serie
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
   mongodb:
     embedded:
       version: 4.0.2
@@ -10,6 +15,11 @@ spring:
       mongodb:
         database: test
         port: 27017
+
+info:
+  application:
+    name: api-serie
+
 
 eureka:
   instance:

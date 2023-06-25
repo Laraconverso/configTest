@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: api-movie
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3307/movie-dev
@@ -12,6 +17,10 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+
+info:
+  application:
+    name: api-movie
 
 eureka:
   instance:
