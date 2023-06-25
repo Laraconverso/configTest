@@ -3,13 +3,22 @@ server:
 spring:
   application:
     name: api-catalog
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
   mongodb:
     embedded:
       version: 4.0.2
-    data:
-      mongodb:
-        database: test
-        port: 27017
+  data:
+    mongodb:
+      database: test
+      port: 27017
+
+info:
+  application:
+    name: api-catalog
 
 eureka:
   instance:
@@ -31,13 +40,13 @@ resilience4j:
           - java.io.IOException
           - java.net.SocketTimeoutException
       instances:
-        retryInscription:
+        retryCatalog:
           base-config: default
           max-retry-attempts: 5
           wait-duration: 2s
           retry-exceptions:
             - java.net.ConnectException
-  circuit-breaker:
+  circuitbreaker:
     configs:
       default:
         register-health-indicator: true
@@ -48,13 +57,7 @@ resilience4j:
         automatic-transition-from-open-to-half-open-enabled: true
         failure-rate-threshold: 50
     instances:
-      movieCatalog:
-        base-config: default
-        sliding-window-type: COUNT_BASED
-        sliding-window-size: 5
-        wait-duration-in-open-state: 1m
-        failure-rate-threshold: 20
-      serieCatalog:
+      catalogcircuit:
         base-config: default
         sliding-window-type: COUNT_BASED
         sliding-window-size: 5
